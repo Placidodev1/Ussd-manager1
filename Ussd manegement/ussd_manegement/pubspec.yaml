@@ -1,0 +1,63 @@
+name: ussd_manegement
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Icons
+  cupertino_icons: ^1.0.2
+  iconsax: ^0.0.8
+
+  # state Manegement
+  get: ^4.6.5
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^2.0.0
+
+flutter:
+
+
+  uses-material-design: true
+
+  assets:
+    - assets/logos/
+    - assets/imagens/
+    - assets/icons/
+  #   - images/a_dot_ham.jpeg
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Light.ttf
+        - weight: 300
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - weight: 400
+        - asset: assets/fonts/Poppins-Italic.ttf
+        - style:  italic
+        - asset: assets/fonts/Poppins-Medium.ttf
+        - weight: 500
+        - asset: assets/fonts/Poppins-MediumItalic.ttf
+        - weight: 500
+        - style: italic
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+        - weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+        - weight: 700
+        
+        
+        
