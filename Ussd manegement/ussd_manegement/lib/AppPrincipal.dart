@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ussd_manegement/Bottm_bar.dart';
+import 'package:ussd_manegement/authentication/controllers.onboarding/onboarding_controller.dart';
+import 'package:ussd_manegement/authentication/screams/logon/signup.dart';
+import 'package:ussd_manegement/authentication/screams/login/login.dart';
+import 'package:ussd_manegement/authentication/screams/onBoarding/onboarding.dart';
+import 'package:ussd_manegement/features/app_screns_controllers/screans/home/home.dart';
+import 'package:ussd_manegement/features/app_screns_controllers/screans/home/registoDepacote.dart';
 import 'package:ussd_manegement/utils/theme/theme.dart';
 
 class AppPrincipal extends StatelessWidget {
@@ -6,10 +14,12 @@ class AppPrincipal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp  (
       themeMode: ThemeMode.system,
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
+      home:  Notes(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

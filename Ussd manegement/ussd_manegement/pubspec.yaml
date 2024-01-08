@@ -17,6 +17,7 @@ dependencies:
   http: ^1.1.0
   intl: ^0.18.1
   logger: ^2.0.1
+  smooth_page_indicator: ^1.1.0
   url_launcher: ^6.2.2
 
   # Icons
@@ -26,6 +27,7 @@ dependencies:
   # state Manegement
   get: ^4.6.5
   get_storage: 2.1.1
+  sqflite: ^2.3.0
 
 
 
@@ -43,13 +45,14 @@ flutter:
 
   assets:
     - assets/logos/
-    - assets/imagens/
+    - assets/imagens/animations/
+    - assets/imagens/on_boarding_images/
     - assets/icons/
-  #   - images/a_dot_ham.jpeg
+    
 
   fonts:
     - family: Poppins
-      fonts:
+      fonts: 
         - asset: assets/fonts/Poppins-Light.ttf
         - weight: 300
         - asset: assets/fonts/Poppins-Regular.ttf
