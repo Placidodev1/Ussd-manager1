@@ -16,7 +16,10 @@ class MeuController extends GetxController {
   var valorselecionado = TStrings.valorselecionado.obs;
   var emailselecionado = TStrings.emailselecionado.obs;
   late Future<List<ModelStream>> notes;
+  DateTime dataselecionada = DateTime.now();
 
+
+  
   void onValStreamChanged(String novoValor) {
     valStream.value = novoValor;
   }
@@ -46,7 +49,6 @@ class MeuController extends GetxController {
           "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
       // Aguarde a conclusão da Future e obtenha os dados
       List<ModelStream> allNotes = await notes;
-      
 
       // Filtre as instâncias de ModelStream com base no email
       List<ModelStream> notesFiltradosPorEmail =

@@ -18,16 +18,18 @@ class WidgetBuilderList {
             subtitle: Text(email),
             title: Text(selectedValue),
             trailing: IconButton(
-              icon: const Icon(Icons.delete),
+              icon: const Icon(Icons.send),
               onPressed: () async {
                 meuController.filtrarEAdicionarNumerosPorEmail(email);
                 List<ModelStream> allNotes = await meuController.notes;
                 for (var note in allNotes) {
                   debugPrint(
-                      "ID: ${note.id}, Numero do Cliente: ${note.numeroDoClienteDoPagamento}");
+                      "ID: ${note.id}, Numero do Cliente: ${note.dataDeSubscricao}");
                 }
+
+                
                 List<ModelStream> notesFiltradosPorEmail = allNotes
-                    .where((note) => note.emailDaConta == email)
+                    .where((note) => note.emailDaConta == email )
                     .toList();
                 print(notesFiltradosPorEmail);
 

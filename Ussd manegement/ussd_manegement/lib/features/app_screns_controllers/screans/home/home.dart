@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:ussd_manegement/constants/colors.dart';
 import 'package:ussd_manegement/constants/sizes.dart';
 import 'package:ussd_manegement/constants/strings.dart';
+import 'package:ussd_manegement/features/app_screns_controllers/controllers/dropboxStreamController/DropBoxStreamController.dart';
 import 'package:ussd_manegement/features/app_screns_controllers/modals/streaModel.dart';
 import 'package:ussd_manegement/features/app_screns_controllers/screans/home/registoDepacote.dart';
 import 'package:ussd_manegement/features/app_screns_controllers/screans/home/widgets/listitle.dart';
@@ -16,8 +19,9 @@ class Notes extends StatefulWidget {
 }
 
 class _NotesState extends State<Notes> {
+  final MeuController meuController = Get.find();
   late DatabaseHelper handler;
-  
+
   final db = DatabaseHelper();
   final title = TextEditingController();
   final content = TextEditingController();
@@ -35,8 +39,38 @@ class _NotesState extends State<Notes> {
         return allNotes;
       });
     });
-    
+    delete();
     super.initState();
+  }
+
+  void delete() async {
+    List<ModelStream> allNotes = await meuController.notes;
+
+    for (ModelStream note in allNotes) {
+      int numeroDeDias = 0;
+      print(note.validade);
+      print("osabject");
+      if (note.validade == "7 dias") {
+        numeroDeDias = 7;
+      } else if (note.validade == "21 dias") {
+        numeroDeDias = 21;
+      } else if (note.validade == "30 dias") {
+        numeroDeDias = 30;
+      }
+      DateTime dataAtual = DateTime.now();
+      DateTime dataLocal = DateTime.parse(note.dataDeSubscricao);
+      DateTime dataFutura = dataLocal.add(Duration(days: numeroDeDias));
+      print(dataLocal);
+      print(dataFutura);
+      var pl = dataAtual.difference(dataFutura).inDays;
+      print(pl);
+      if (dataFutura.difference(dataAtual).inDays <= 0) {
+        db.delete(note.id!).whenComplete(() => _refresh());
+        print('Já se passaram 7 dias desde a data de subscrição.');
+      } else {
+        print('Ainda não se passaram 7 dias desde a data de subscrição.');
+      }
+    }
   }
 
   Future<List<ModelStream>> getAllNotes() {
@@ -44,19 +78,17 @@ class _NotesState extends State<Notes> {
   }
 
   Future<void> _refresh() async {
-    
     setState(() {
       meuController.notes = getAllNotes().then((allNotes) {
         meuController.numerosFiltrados.value =
             allNotes.map((note) => note.numeroDoCliente.toString()).toList();
-            //  // Imprimir detalhes de cada instância
-            // for (var note in allNotes) {
-            //   debugPrint("ID: ${note.id}, Numero do Cliente: ${note.numeroDoClienteDoPagamento}");
-            // }
+        //  // Imprimir detalhes de cada instância
+        // for (var note in allNotes) {
+        //   debugPrint("ID: ${note.id}, Numero do Cliente: ${note.numeroDoClienteDoPagamento}");
+        // }
         return allNotes;
       });
     });
-
   }
 
   @override
@@ -67,7 +99,7 @@ class _NotesState extends State<Notes> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(
-        context, MaterialPageRoute(builder: (Context) => Registation()))
+                context, MaterialPageRoute(builder: (Context) => Registation()))
             .then((value) {
           if (value) {
             _refresh();
@@ -95,6 +127,7 @@ class _NotesState extends State<Notes> {
                 onChanged: (val) {
                   meuController.onValSelecionado(val as String);
                   _refresh();
+                  delete();
                 },
                 icon: const Icon(
                   Icons.arrow_drop_down_circle,

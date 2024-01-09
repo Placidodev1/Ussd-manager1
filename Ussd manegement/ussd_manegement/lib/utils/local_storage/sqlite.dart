@@ -6,7 +6,7 @@ class DatabaseHelper {
   final databaseName = "stream.db";
 
   String streamTable =
-      "CREATE TABLE notes (id INTEGER PRIMARY KEY AUTOINCREMENT, nipoDeRegisto TEXT NOT NULL, nomeDoCliente TEXT NOT NULL, numeroDoCliente INTEGER NOT NULL, numeroDoClienteDoPagamento INTEGER NOT NULL, emailDaConta TEXT NOT NULL, userDaConta TEXT NOT NULL, password TEXT NOT NULL, validade TEXT NOT NULL, dataDeSubscricao TEXT CURRENT_TIMESTAMP)";
+      "CREATE TABLE notes (id INTEGER PRIMARY KEY AUTOINCREMENT, nipoDeRegisto TEXT NOT NULL, nomeDoCliente TEXT NOT NULL, numeroDoCliente INTEGER NOT NULL, numeroDoClienteDoPagamento INTEGER NOT NULL, emailDaConta TEXT NOT NULL, userDaConta TEXT NOT NULL, password TEXT NOT NULL, validade TEXT NOT NULL, dataDeSubscricao TEXT TIMESTAMP)";
   Future<Database> initDB() async {
     final DatabasesPath = await getDatabasesPath();
     final path = join(DatabasesPath, databaseName);

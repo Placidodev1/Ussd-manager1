@@ -9,6 +9,7 @@ import 'package:ussd_manegement/constants/sizes.dart';
 import 'package:ussd_manegement/constants/strings.dart';
 import 'package:ussd_manegement/features/app_screns_controllers/controllers/dropboxStreamController/DropBoxStreamController.dart';
 import 'package:ussd_manegement/features/app_screns_controllers/modals/streaModel.dart';
+import 'package:ussd_manegement/features/app_screns_controllers/screans/home/widgets/datepicker.dart';
 import 'package:ussd_manegement/features/app_screns_controllers/screans/home/widgets/dropBox.dart';
 
 import 'package:ussd_manegement/utils/local_storage/sqlite.dart';
@@ -31,7 +32,6 @@ final senhaController = TextEditingController();
 
 const formkey = GlobalKey<FormState>;
 final db = DatabaseHelper();
-// final MeuController meuController = Get.put(MeuController());
 final MeuController meuController = Get.find();
 
 class _RegistrationState extends State<Registration> {
@@ -101,6 +101,8 @@ class _RegistrationState extends State<Registration> {
           height: TSizes.spaceBtwInputFields,
         ),
 
+        DataPickerButton(),
+        
         // validade
         dropboxValidade(),
 
@@ -144,7 +146,7 @@ class _RegistrationState extends State<Registration> {
                     emailDaConta: meuController.emailselecionado.value,
                     userDaConta: userController.text,
                     password: senhaController.text,
-                    dataDeSubscricao: DateTime.now().toIso8601String(),
+                    dataDeSubscricao: meuController.dataselecionada.toIso8601String(),
                   ))
                   .whenComplete(() => Navigator.of(context).pop(true));
             },
@@ -155,3 +157,5 @@ class _RegistrationState extends State<Registration> {
     ));
   }
 }
+
+
